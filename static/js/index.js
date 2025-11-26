@@ -76,3 +76,24 @@ $(document).ready(function() {
     bulmaSlider.attach();
 
 })
+
+document.addEventListener('DOMContentLoaded', () => {
+  const tabs = document.querySelectorAll('#task-tabs li');
+  const contents = document.querySelectorAll('.task-content');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      // Remove active class from all tabs
+      tabs.forEach(t => t.classList.remove('is-active'));
+      // Hide all content
+      contents.forEach(c => c.style.display = 'none');
+
+      // Activate clicked tab
+      tab.classList.add('is-active');
+      
+      // Show target content
+      const targetId = tab.getAttribute('data-tab');
+      document.getElementById(targetId).style.display = 'block';
+    });
+  });
+});

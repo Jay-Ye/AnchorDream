@@ -1,3 +1,68 @@
+/* Custom Text Gradient for AnchorDream */
+.anchordream-title {
+  /* Italic as requested */
+  font-style: normal;
+  
+  /* The Gradient: Deep Ocean Blue -> Cyan -> Dreamy Lavender */
+  background: linear-gradient(90deg, #0f3d5c 0%, #2b7095 40%, #a46db5 100%);
+  
+  /* Clip background to text */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  
+  /* Optional: small filter to make it pop */
+  filter: drop-shadow(0px 1px 1px rgba(0,0,0,0.1));
+}
+
+/* --- 1. OVERRIDE NERFIES DEFAULT VIDEO WRAPPER --- */
+/* The default 'publication-video' forces 16:9. We must reset this 
+so the container grows/shrinks with your video's actual size. */
+.task-content .publication-video {
+height: auto !important;
+padding-bottom: 0 !important; /* Removes the fixed aspect ratio */
+overflow: visible !important;
+}
+
+/* --- 2. FLUID VIDEO RESIZING --- */
+/* Ensures the video fills the width but calculates its own height */
+.task-content video {
+  width: 100%;
+  height: auto;
+  display: block; /* Removes bottom whitespace */
+  object-fit: contain;
+  border-radius: 10px; /* Optional: adds rounded corners to video */
+}
+
+/* --- 3. BLUE TABS (Reference Style) --- */
+/* Makes the active tab blue instead of the default dark grey */
+.tabs.is-toggle li.is-active a {
+  background-color: #3273dc !important; /* Bulma Blue */
+  border-color: #3273dc !important;
+  color: #ffffff !important;
+}
+
+.tabs.is-toggle li.is-active a:hover {
+  background-color: #276cda !important;
+}
+
+/* --- REMOVE ARC/ROUNDED CORNERS --- */
+
+/* 1. Remove curves from the container */
+.task-content .publication-video {
+  border-radius: 0 !important;
+  mask-image: none !important;         /* Removes any shape masking */
+  -webkit-mask-image: none !important;
+  box-shadow: none !important;         /* Removes shadow which sometimes looks like a crop */
+}
+
+/* 2. Remove curves from the actual video element */
+.task-content video {
+  border-radius: 0 !important;
+  outline: none !important;
+}
+
 body {
   font-family: 'Noto Sans', sans-serif;
 }
@@ -154,4 +219,91 @@ body {
 }
 #interpolation-image-wrapper img {
   border-radius: 5px;
+}
+
+/* --- TRICK 1: DREAM FLOW BACKGROUND --- */
+body {
+  /* A large gradient that shifts slowly */
+  background: linear-gradient(-45deg, #ffffff, #f0f8ff, #e6e6fa, #fffaf0);
+  background-size: 400% 400%;
+  animation: dreamFlow 15s ease infinite;
+}
+
+@keyframes dreamFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Ensure text is readable on the slight color */
+.title, .subtitle, .content, .navbar-item {
+  mix-blend-mode: multiply; /* Helps text blend nicely */
+}
+
+/* --- TRICK 3: HOVER GLOW & ELEVATION --- */
+.publication-video {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(0,0,0,0.05); /* Very subtle border */
+}
+
+.publication-video:hover {
+  transform: translateY(-5px); /* Lift up slightly */
+  /* A soft blue/purple glow matching your theme */
+  box-shadow: 0 10px 30px -10px rgba(86, 204, 242, 0.4); 
+}
+
+/* Make the Active Tab button pulse slightly */
+.tabs.is-toggle li.is-active a {
+  box-shadow: 0 0 15px rgba(50, 115, 220, 0.5);
+  transition: all 0.3s ease;
+}
+
+/* --- TRICK 4: ANCHOR BULLETS --- */
+.content ul {
+  list-style: none; /* Remove default dots */
+  padding-left: 1.5em;
+}
+
+.content ul li {
+  position: relative;
+  margin-bottom: 0.5em;
+}
+
+.content ul li::before {
+  content: '⚓'; /* The Anchor Emoji */
+  position: absolute;
+  left: -1.5em;
+  color: #0f3d5c; /* Your Navy Blue color */
+  font-size: 0.8em;
+  top: 0.2em;
+}
+
+/* --- TRICK 5: BLEND WHITE VIDEO BACKGROUND --- */
+#teaser, #method {
+  /* Makes white pixels transparent, letting the page background show through */
+  mix-blend-mode: multiply;
+  
+  /* Optional: Boost contrast slightly so the blacks look deep */
+  filter: contrast(1.05); 
+  
+  /* Ensure it has block layout */
+  display: block;
+}
+
+/* --- TRICK 6: BLEND PLOTS & TABLES --- */
+/* Target images inside the columns of the experimental results section */
+.section .column img {
+  /* 1. Make white backgrounds transparent */
+  mix-blend-mode: multiply;
+  
+  /* 2. Slightly boost contrast so text remains sharp against the colored background */
+  filter: contrast(1.05);
+  
+  /* 3. Ensure they don't look flat */
+  transition: transform 0.3s ease;
+}
+
+/* Optional: Subtle lift on hover for tables/plots */
+.section .column img:hover {
+  transform: scale(1.02);
 }
