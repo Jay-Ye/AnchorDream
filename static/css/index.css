@@ -307,3 +307,21 @@ body {
 .section .column img:hover {
   transform: scale(1.02);
 }
+
+/* --- TRICK 7: BLEND GENERATED VARIATIONS VIDEOS --- */
+.task-content video {
+  /* Makes the white background of the video transparent */
+  mix-blend-mode: multiply;
+  
+  /* Slightly boosts contrast to ensure the robot/objects don't look washed out */
+  filter: contrast(1.05);
+}
+
+/* --- REMOVE VIDEO BORDERS --- */
+.task-content .publication-video,
+.task-content video {
+  border: none !important;       /* Removes the 1px solid line */
+  box-shadow: none !important;   /* Removes any glow or shadow */
+  outline: none !important;      /* Removes focus outlines */
+  background: transparent !important; /* Ensures container is clear */
+}
