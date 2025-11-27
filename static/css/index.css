@@ -258,7 +258,7 @@ body {
   transition: all 0.3s ease;
 }
 
-/* --- TRICK 4: ANCHOR BULLETS --- */
+/* --- TRICK 4: CUSTOM ANCHOR SVG BULLETS --- */
 .content ul {
   list-style: none; /* Remove default dots */
   padding-left: 1.5em;
@@ -270,12 +270,20 @@ body {
 }
 
 .content ul li::before {
-  content: '⚓'; /* The Anchor Emoji */
+  content: ''; /* Empty content because we are using a background image */
   position: absolute;
-  left: -1.5em;
-  color: #0f3d5c; /* Your Navy Blue color */
-  font-size: 0.8em;
-  top: 0.2em;
+  left: -1.6em; /* Adjust spacing to left */
+  top: 0.2em;   /* Adjust vertical alignment */
+  
+  /* Size of the icon */
+  width: 1.2em;
+  height: 1.2em;
+  
+  /* The Image */
+  background-image: url('../images/anchordream.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 /* --- TRICK 5: BLEND WHITE VIDEO BACKGROUND --- */
