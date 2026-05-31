@@ -1,0 +1,3 @@
+[submodule "custom/third_party/droid"]
+	path = custom/third_party/droid
+	url = https://huggingface.co/KarlP/droid
